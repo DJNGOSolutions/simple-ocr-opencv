@@ -102,3 +102,7 @@ ENV/
 
 #PyCharm
 /.idea
+
+#Your own DUI images
+/simpleocr/data/dui-front.jpg
+/simpleocr/data/dui-reverse.jpg
