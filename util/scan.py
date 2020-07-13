@@ -1,9 +1,9 @@
 import cv2
 import imutils
-import textDetector as detector
+import util.textDetector as detector
 from skimage.filters import threshold_local
 
-from transform import four_point_transform, rotate_bound
+from util.transform import four_point_transform, rotate_bound
 
 # # construct the argument parser
 # ap = argparse.ArgumentParser()
@@ -57,15 +57,27 @@ warped = four_point_transform(orig, screenCnt.reshape(4, 2) * ratio)
 # warped = cv2.cvtColor(warped, cv2.COLOR_BGR2BGRA)
 # T = threshold_local(warped, 11, offset = 10, method = "gaussian")
 warped = warped.astype("uint8") * 255
-warped = rotate_bound(warped, -90)
 
 # show the original and scanned images
 print("STEP 3: Apply perspective transform")
-cv2.imshow("Original", imutils.resize(orig, height = 650))
-cv2.imshow("Scanned", imutils.resize(warped, height = 650))
+# cv2.imshow("Original", imutils.resize(orig, height = 650))
+# cv2.imshow("Scanned", imutils.resize(warped, height = 650))
+
+
+# Cropping the image into 2 separate images.
+print("STEP 4: Crop image and create each side separately")
+resizedImg = imutils.resize(warped, height = 650)
+hImg, wImg, _= resizedImg.shape
+
+leftImg = resizedImg[185:hImg-190, 5:670]
+rightImg = resizedImg[167:hImg - 220, 665: wImg -40]
+cv2.imshow("Left", leftImg)
+cv2.imshow("Right", rightImg)
 
 # Obtaining words
-imgWords = detector.detectWords(imutils.resize(warped, height = 650))
-cv2.imshow("Words", imutils.resize(imgWords, height = 650))
+leftWords = detector.detectWordsLeft(imutils.resize(leftImg, height = 650))
+rightWords = detector.detectWords(imutils.resize(rightImg, height = 650))
+cv2.imshow("Left Words", leftWords)
+cv2.imshow("Right Words", rightWords)
 cv2.waitKey(0)
 
