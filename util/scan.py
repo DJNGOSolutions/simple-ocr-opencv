@@ -47,18 +47,18 @@ def readingFrontWords(imagePath):
     # Dibujamos los contornos en la imagen
     cv2.drawContours(imagef, [screenCntf], -1, (0, 255, 0), 2)
 
-    #Obtenemos una imagen desde arriba del Documento
+    # Obtenemos una imagen desde arriba del Documento
     warpedf = four_point_transform(origf, screenCntf.reshape(4, 2) * ratiof)
     warpedf = warpedf.astype("uint8") * 255
 
     # L o volvemos a hacer de la altura deseada para asegurarnos que la imagen siempre tendra el mismo tamaño
     resizedFront = imutils.resize(warpedf, height=650)
-    resizedFront = rotate_bound(resizedFront, -90)
+    resizedFront = rotate_bound(resizedFront, 90)
     hImg, wImg, _ = resizedFront.shape
     # Cortamos la imagen para obtener solamente la parte con las letras
-    resizedFront = resizedFront[90: hImg - 90, 0: wImg]
+    resizedFront = resizedFront[90: hImg - 110, 170: wImg-40]
     # Utilizamos el OCR para detectar las letras en la imagen
-    frontWords = detector.detectWordsF(imutils.resize(resizedFront, height=650))
+    frontWords = detector.detectWordsF(imutils.resize(resizedFront, height=450))
     # Mostramos las letras con la imagen
     cv2.imshow("Front Words", frontWords)
 
@@ -70,7 +70,7 @@ def readingBackWords(imgPath):
 
     # load the image and compute the ratio of the old height
     # to the new height, clone it, and resize it
-    image = cv2.imread("resources/dui.jpg")
+    image = cv2.imread(imgPath)
     ratio = image.shape[0] / 500.0
     orig = image.copy()
     image = imutils.resize(image, height=500)
@@ -138,7 +138,7 @@ def readingBackWords(imgPath):
     cv2.imshow("Right Words", rightWords)
 
 
-readingFrontWords("resources/dui-front3.jpg")
+readingFrontWords("resources/dui-front2.jpg")
 readingBackWords("resources/dui.jpg")
 cv2.waitKey(0)
 

@@ -49,14 +49,15 @@ def detectWordsF(img):
     # print('Image Height: ', hImg)
     # print('Image Width: ', wImg)
     conf = "r'--oem 2 --psm 1 -l eng/esp'"
+    wordsAsString = pytesseract.image_to_string(img, config=conf)
     boxes = pytesseract.image_to_data(img, config=conf)
 # This prints the information of every string
-#     print(boxes)
+    print(wordsAsString)
     for x, b in enumerate(boxes.splitlines()):
         if x != 0:
             b = b.split()
             if len(b) == 12:
-                print(b)
+                # print(b)
                 x, y, w, h = int(b[6]), int(b[7]), int(b[8]), int(b[9])
                 cv2.rectangle(img, (x, y), (w+x, h+y), (0, 0, 255), 2)
                 cv2.putText(img, b[11], (x, y), cv2.FONT_HERSHEY_COMPLEX, 1, (50, 50, 255), 2)
