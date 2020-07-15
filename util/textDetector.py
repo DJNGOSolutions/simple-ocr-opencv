@@ -70,9 +70,10 @@ def detectWordsLeft(img):
     # print('Image Height: ', hImg)
     # print('Image Width: ', wImg)
     conf = "r'--oem 2 --psm 1 -l eng/esp'"
+    wordsAsStrings = pytesseract.image_to_string(img, config=conf)
     boxes = pytesseract.image_to_data(img, config=conf)
 # This prints the information of every string
-    print(boxes)
+    print(wordsAsStrings)
     for x, b in enumerate(boxes.splitlines()):
         if x != 0:
             b = b.split()

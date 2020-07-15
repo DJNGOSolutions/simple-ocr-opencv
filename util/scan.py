@@ -126,19 +126,19 @@ def readingBackWords(imgPath):
     resizedImg = imutils.resize(warped, height = 650)
     hImg, wImg, _= resizedImg.shape
 
-    leftImg = resizedImg[185:hImg-190, 5:670]
+    leftImg = resizedImg[185:hImg-190, 3:670]
     rightImg = resizedImg[167:hImg - 220, 665: wImg -40]
     # cv2.imshow("Left", leftImg)
     # cv2.imshow("Right", rightImg)
 
     # Obtaining words
-    leftWords = detector.detectWordsLeft(imutils.resize(leftImg, height = 450))
-    rightWords = detector.detectWords(imutils.resize(rightImg, height = 650))
+    leftWords = detector.detectWordsLeft(imutils.resize(leftImg, height = 400))
+    # rightWords = detector.detectWords(imutils.resize(rightImg, height = 650))
     cv2.imshow("Left Words", leftWords)
-    cv2.imshow("Right Words", rightWords)
+    # cv2.imshow("Right Words", rightWords)
 
 
-readingFrontWords("resources/dui-front2.jpg")
+# readingFrontWords("resources/dui-front2.jpg")
 readingBackWords("resources/dui.jpg")
 cv2.waitKey(0)
 
