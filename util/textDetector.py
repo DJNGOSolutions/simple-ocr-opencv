@@ -64,7 +64,7 @@ def detectWordsF(img):
     return img
 
 
-def detectWordsLeft(img):
+def detectWordsLeft1(img):
     print('Detecting Words in the left side...')
     hImg, wImg, _ = img.shape
     # print('Image Height: ', hImg)
@@ -83,6 +83,20 @@ def detectWordsLeft(img):
                 cv2.rectangle(img, (x, y), (w+x, h+y), (0, 0, 255), 2)
                 cv2.putText(img, b[11], (x, y), cv2.FONT_HERSHEY_COMPLEX, 1, (50, 50, 255), 2)
     return img
+
+
+def detectWordsLeft(imgRes, imgFam):
+    print('Detecting Words in the left side...')
+    hImg, wImg, _ = imgRes.shape
+    hImgF, wImgF, _ = imgFam.shape
+    # print('Image Height: ', hImg)
+    # print('Image Width: ', wImg)
+    conf = "r'--oem 2 --psm 1 -l eng/esp'"
+    wordsAsStrings = pytesseract.image_to_string(imgRes, config=conf)
+    wordsAsStringsF = pytesseract.image_to_string(imgFam, config=conf)
+# This prints the information of every string
+    print(wordsAsStrings)
+    print(wordsAsStringsF)
 
 
 # DETECTING NUMBERS
