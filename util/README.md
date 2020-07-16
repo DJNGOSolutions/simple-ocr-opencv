@@ -4,17 +4,17 @@
 Este sistema pretende ser utilizado para el escaneo y obtención de datos obtenidos dentro de el DUI (Documento Único de Identidad en El Salvador). Esta información sera recolectada por el programa y enviada por medio de una API a un sistema web para posteriormente ser mostrado con amabilidad para el usuario.
 
 ### Requisitos del sistema.
-Python versión 2.7, 3.x
-IDE capaz de compilar y ejecutar codigo Python.
-Entorno Python de desarrollo con los siguientes paquetes instalados.
-opencv-python (Sirve para el reconocimiento de objetos).
-pytesseract (Reconocimiento óptico de caracteres).
-imutils (Manipulacion de imagenes).
-matplotlib.
-numpy (Libreria numerica de Python).
-pip.
-scikit-image (Manipulacion de imagenes).
-Tener instalado el programa de tesseract, para mas informacion sobre como instalarlo siga aqui: [windows], [linux] y [Mac].
+* Python versión 2.7, 3.x
+* IDE capaz de compilar y ejecutar codigo Python.
+* Entorno Python de desarrollo con los siguientes paquetes instalados.
+* opencv-python (Sirve para el reconocimiento de objetos).
+* pytesseract (Reconocimiento óptico de caracteres).
+* imutils (Manipulacion de imagenes).
+* matplotlib.
+* numpy (Libreria numerica de Python).
+* pip.
+* scikit-image (Manipulacion de imagenes).
+* Tener instalado el programa de tesseract, para mas informacion sobre como instalarlo siga aqui: [windows], [linux] y [Mac].
 
 ### Procedimiento para utilizar el programa.
 1. Preparar el entorno de Python.
