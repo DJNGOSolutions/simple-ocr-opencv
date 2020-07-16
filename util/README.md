@@ -23,15 +23,15 @@ Tener instalado el programa de tesseract, para mas informacion sobre como instal
 4. Correr el programa scan.py.
 
 ### Funciones dentro del sistema.
-#####scan.py: 
+#### scan.py: 
 Este es el archivo main de nuestro programa, dentro de este se encuentra la logica central de todo el codigo utilizado para scanear y manipular la imagen.
-#####textDetector.py: 
+#### textDetector.py: 
 Dentro de este archivo se encuentran las funciones que hacen uso de tesseract para leer los textos contenidos dentro de la imagen.
-#####transform.py: 
+#### transform.py: 
 Aqui se encuentran las funciones encargadas de obtener las esquinas del objeto a escanear, modificar su visualización a modo perspectiva y la función para rotar imagenes (de ser necesario).
 
 
-###Informacion a tomar en cuenta.
+### Informacion a tomar en cuenta.
 - La información obtenida dentro del sistema tiene una precisión aproximada del 60%.
 - La correcta detección del dui depende de la resolución de la imagen y de la claridad de sus bordes con respecto al fondo que la contenga.
 
