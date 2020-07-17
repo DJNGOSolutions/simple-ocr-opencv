@@ -5,6 +5,7 @@ Este sistema pretende ser utilizado para el escaneo y obtención de datos obteni
 
 ### Requisitos del sistema.
 * Python versión 2.7, 3.x
+* Postgres 10+
 * IDE capaz de compilar y ejecutar codigo Python.
 * Entorno Python de desarrollo con los siguientes paquetes instalados.
 * opencv-python (Sirve para el reconocimiento de objetos).
@@ -23,6 +24,8 @@ Este sistema pretende ser utilizado para el escaneo y obtención de datos obteni
 4. Correr el programa scan.py.
 
 ### Funciones dentro del sistema.
+### api/app.py
+Levanta el api en el puerto 5000
 #### scan.py: 
 Este es el archivo main de nuestro programa, dentro de este se encuentra la logica central de todo el codigo utilizado para scanear y manipular la imagen.
 #### textDetector.py: 
@@ -32,6 +35,7 @@ Aqui se encuentran las funciones encargadas de obtener las esquinas del objeto a
 
 
 ### Informacion a tomar en cuenta.
+- instalar las dependencias que se encuentran en el requirement.txt y adicionalmente instala falsk-sqalquemy y psycopg2 o psycoopg2-binary
 - La información obtenida dentro del sistema tiene una precisión aproximada del 60%.
 - La correcta detección del dui depende de la resolución de la imagen y de la claridad de sus bordes con respecto al fondo que la contenga.
 
