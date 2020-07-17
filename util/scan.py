@@ -2,10 +2,8 @@ import cv2
 import imutils
 import util.textDetector as detector
 from skimage.filters import threshold_local
-import numpy as np
 
 from util.transform import four_point_transform, rotate_bound
-from dui import Dui
 
 
 # # construct the argument parser
@@ -56,27 +54,14 @@ def readingFrontWords(imagePath):
 
     # Lo volvemos a hacer de la altura deseada para asegurarnos que la imagen siempre tendra el
     # mismo tamaño
-    resizedFront = imutils.resize(warpedf, height=650)
+    resizedFront = imutils.resize(grayf, height=650)
     resizedFront = rotate_bound(resizedFront, 90)
-
-    gray = cv2.cvtColor(imagef, cv2.COLOR_RGB2GRAY)
-    gray, img_bin = cv2.threshold(gray, 255, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
-    gray = cv2.bitwise_not(img_bin)
-    kernel = np.ones((2, 1), np.uint8)
-
-    img = cv2.erode(gray, kernel, iterations=3)
-
-    img = cv2.dilate(img, kernel, iterations=3)
-    print(detector.test(img))
-    cv2.imshow('title', img)
-
-    hImg, wImg, _ = resizedFront.shape
+    hImg, wImg = resizedFront.shape
     # Cortamos la imagen para obtener solamente la parte con las letras
     resizedFront = resizedFront[90: hImg - 110, 170: wImg - 40]
     # Utilizamos el OCR para detectar las letras en la imagen
     frontWords = detector.detectWordsF(imutils.resize(resizedFront, height=450))
     # Mostramos las letras con la imagen
-    # cv2.imshow("Front Words", frontWords)
     return frontWords
 
 
@@ -149,22 +134,9 @@ def readingBackWords(imgPath):
     # cv2.imshow("Right", rightImg)
 
     # Obtaining words
-    return detector.detectWordsLeft(imutils.resize(leftImgRes, height=300), imutils.resize(
-        leftImgFam, height=200))
-    # rightWords = detector.detectWords(imutils.resize(rightImg, height = 650))
-    # print(rightWords)
+    detector.detectWordsLeft(imutils.resize(leftImgRes, height=300),
+                             imutils.resize(leftImgFam, height=200))
+    rightWords = detector.detectWords(imutils.resize(rightImg, height=650))
+    return rightWords
     # cv2.imshow("Left Words", leftWords)
     # cv2.imshow("Right Words", rightWords)
-
-
-r: str = readingFrontWords("resources/dui-front2.jpg")
-l: str = readingBackWords("resources/dui.jpg")
-print("right side")
-print(r.replace('\n', ''))
-print(r.split('\n'))
-print("left side")
-print(l.replace('\n', ''))
-
-d = Dui(r.replace('\n', ''))
-print(d.front_side)
-cv2.waitKey(0)

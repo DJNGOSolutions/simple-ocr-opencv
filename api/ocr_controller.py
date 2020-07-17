@@ -10,6 +10,8 @@ from .Document import Document
 from .db import db
 from .dui import Dui
 
+from util import scan
+
 ocr_controller = Blueprint('ocr_controller', __name__)
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
@@ -82,10 +84,11 @@ def upload():
     filePath = os.path.join(current_app.root_path, 'uploads', filename)
     file.save(filePath)
 
-    joined, lines, confidence, response = extract(filePath)
+    # joined, lines, confidence, response = extract(filePath)
+    front = scan.readingFrontWords(filePath)
 
-    dui = Dui(fs_string=joined)
-    saveDoc(joined)
+    dui = Dui(fs_string=front)
+    saveDoc(front)
     # response = jsonify({
     #    'status': 200,
     #    'message': 'Success',
@@ -94,7 +97,7 @@ def upload():
     # })
     response = jsonify({
         'status': 200,
-        'data': joined
+        'data': front
     })
 
     return response if response is not None else {}

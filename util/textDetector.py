@@ -51,7 +51,7 @@ def detectWords(img):
 # DETECTING WORDS
 def detectWordsF(img):
     print('Detecting Words in the Front side...')
-    hImg, wImg, _ = img.shape
+    hImg, wImg = img.shape
     # print('Image Height: ', hImg)
     # print('Image Width: ', wImg)
     conf = "r'--oem 2 --psm 1 -l eng/esp'"
