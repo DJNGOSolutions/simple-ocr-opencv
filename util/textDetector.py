@@ -1,7 +1,13 @@
 import cv2
 import pytesseract
 
-pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files (x86)\\Tesseract-OCR\\tesseract.exe'
+pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
+
+
+def test(img):
+    conf = "r'--oem 2 --psm 1 -l eng/esp'"
+    wordsAsString = pytesseract.image_to_string(img)
+    return wordsAsString
 
 
 # DETECTING CHARACTERS
@@ -29,15 +35,15 @@ def detectWords(img):
     # print('Image Width: ', wImg)
     conf = "r'--oem 2 --psm 1 -l eng/esp'"
     boxes = pytesseract.image_to_data(img, config=conf)
-# This prints the information of every string
-#     print(boxes)
+    # This prints the information of every string
+    #     print(boxes)
     for x, b in enumerate(boxes.splitlines()):
         if x != 0:
             b = b.split()
             if len(b) == 12:
-                print(b)
+                # print(b)
                 x, y, w, h = int(b[6]), int(b[7]), int(b[8]), int(b[9])
-                cv2.rectangle(img, (x, y), (w+x, h+y), (0, 0, 255), 2)
+                cv2.rectangle(img, (x, y), (w + x, h + y), (0, 0, 255), 2)
                 cv2.putText(img, b[11], (x, y), cv2.FONT_HERSHEY_COMPLEX, 1, (50, 50, 255), 2)
     return img
 
@@ -51,17 +57,17 @@ def detectWordsF(img):
     conf = "r'--oem 2 --psm 1 -l eng/esp'"
     wordsAsString = pytesseract.image_to_string(img, config=conf)
     boxes = pytesseract.image_to_data(img, config=conf)
-# This prints the information of every string
-    print(wordsAsString)
+    # This prints the information of every string
+    # print(wordsAsString)
     for x, b in enumerate(boxes.splitlines()):
         if x != 0:
             b = b.split()
             if len(b) == 12:
                 # print(b)
                 x, y, w, h = int(b[6]), int(b[7]), int(b[8]), int(b[9])
-                cv2.rectangle(img, (x, y), (w+x, h+y), (0, 0, 255), 2)
+                cv2.rectangle(img, (x, y), (w + x, h + y), (0, 0, 255), 2)
                 cv2.putText(img, b[11], (x, y), cv2.FONT_HERSHEY_COMPLEX, 1, (50, 50, 255), 2)
-    return img
+    return wordsAsString
 
 
 def detectWordsLeft1(img):
@@ -72,17 +78,17 @@ def detectWordsLeft1(img):
     conf = "r'--oem 2 --psm 1 -l eng/esp'"
     wordsAsStrings = pytesseract.image_to_string(img, config=conf)
     boxes = pytesseract.image_to_data(img, config=conf)
-# This prints the information of every string
-    print(wordsAsStrings)
+    # This prints the information of every string
+    # print(wordsAsStrings)
     for x, b in enumerate(boxes.splitlines()):
         if x != 0:
             b = b.split()
             if len(b) == 12:
                 # print(b)
                 x, y, w, h = int(b[6]), int(b[7]), int(b[8]), int(b[9])
-                cv2.rectangle(img, (x, y), (w+x, h+y), (0, 0, 255), 2)
+                cv2.rectangle(img, (x, y), (w + x, h + y), (0, 0, 255), 2)
                 cv2.putText(img, b[11], (x, y), cv2.FONT_HERSHEY_COMPLEX, 1, (50, 50, 255), 2)
-    return img
+    return wordsAsStrings
 
 
 def detectWordsLeft(imgRes, imgFam):
@@ -94,32 +100,28 @@ def detectWordsLeft(imgRes, imgFam):
     conf = "r'--oem 2 --psm 1 -l eng/esp'"
     wordsAsStrings = pytesseract.image_to_string(imgRes, config=conf)
     wordsAsStringsF = pytesseract.image_to_string(imgFam, config=conf)
-# This prints the information of every string
-    print(wordsAsStrings)
-    print(wordsAsStringsF)
+    # This prints the information of every string
+    # print(wordsAsStrings)
+    # print(wordsAsStringsF)
+    return wordsAsStrings
 
 
 # DETECTING NUMBERS
 def detectNumbers(img):
     print('Detecting Numbers...')
-    hImg, wImg= img.shape
+    hImg, wImg = img.shape
     print('Image Height: ', hImg)
     print('Image Width: ', wImg)
     cong = r'--oem 0 --psm 6 outputbase digits'
     boxes = pytesseract.image_to_data(img, config=cong)
-# This prints the information of every string
-# print(boxes)
+    # This prints the information of every string
+    # print(boxes)
     for x, b in enumerate(boxes.splitlines()):
         if x != 0:
             b = b.split()
             if len(b) == 12:
                 # print(b)
                 x, y, w, h = int(b[6]), int(b[7]), int(b[8]), int(b[9])
-                cv2.rectangle(img, (x, y), (w+x, h+y), (0, 0, 255), 2)
+                cv2.rectangle(img, (x, y), (w + x, h + y), (0, 0, 255), 2)
                 cv2.putText(img, b[11], (x, y), cv2.FONT_HERSHEY_COMPLEX, 1, (50, 50, 255), 2)
     return img
-
-
-
-
-
